@@ -1,7 +1,6 @@
 {
   "name": "todo-list",
   "version": "1.0.0",
-  "description": "",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,5 +25,8 @@
   },
   "dependencies": {
     "date-fns": "^2.27.0"
-  }
+  },
+  "main": "webpack.config.js",
+  "keywords": [],
+  "description": ""
 }

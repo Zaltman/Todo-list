@@ -1,9 +1,40 @@
 import './style.css';
+import { domComponentNameClass } from './dom.js';
 
-function component() {
-  const element = document.createElement('div');
+document.querySelector('body').appendChild(domComponentNameClass('aside'));
+document.querySelector('body').appendChild(domComponentNameClass('content'));
 
-  return element;
-}
+document
+  .querySelector('aside')
+  .appendChild(domComponentNameClass('button', 'addBtn')).textContent =
+  '+ Create new task';
 
-document.querySelector('body').append(component());
+document
+  .querySelector('aside')
+  .appendChild(domComponentNameClass('button', 'taskList')).textContent =
+  'today';
+
+document
+  .querySelector('aside')
+  .appendChild(domComponentNameClass('button', 'taskList')).textContent =
+  'tomorrow';
+
+document
+  .querySelector('aside')
+  .appendChild(domComponentNameClass('button', 'taskList')).textContent =
+  'this week';
+
+document
+  .querySelector('aside')
+  .appendChild(domComponentNameClass('button', 'taskList')).textContent =
+  'next week';
+
+document
+  .querySelector('aside')
+  .appendChild(domComponentNameClass('button', 'taskList')).textContent =
+  'this month';
+
+document
+  .querySelector('aside')
+  .appendChild(domComponentNameClass('button', 'taskList')).textContent =
+  'All tasks';
