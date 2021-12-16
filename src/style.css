@@ -9,6 +9,7 @@ body {
 }
 
 content {
+  display: flex;
   background-color: rgb(214, 241, 250);
   height: 100vh;
   flex-grow: 1;
@@ -19,6 +20,14 @@ aside {
   flex-direction: column;
   width: 15rem;
   background-color: rgb(153, 226, 248);
+}
+
+button {
+  background-color: azure;
+}
+
+button:hover {
+  background-color: rgb(199, 235, 235);
 }
 
 .addBtn {
@@ -38,4 +47,15 @@ aside {
   height: 25px;
   border-radius: 5px;
   align-self: center;
+}
+
+.taskContainer {
+  margin: 50px;
+  flex-grow: 1;
+  min-height: 300px;
+  max-height: 800px;
+  min-width: 100px;
+  max-width: 300px;
+  background-color: azure;
+  border-radius: 5px;
 }
