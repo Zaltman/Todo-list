@@ -59,3 +59,7 @@ button:hover {
   background-color: azure;
   border-radius: 5px;
 }
+
+.oneTaskContainer {
+  margin: 25px;
+}
