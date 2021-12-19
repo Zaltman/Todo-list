@@ -1,11 +1,11 @@
 const todoFactory = () => {
-  title = prompt('title');
-  description = prompt('description');
-  priority = prompt('Priority from 0 to 4');
+  let title = prompt('title');
+  let description = prompt('description');
+  let priority = prompt('Priority from 0 to 4');
   return { title, description, priority };
 };
 
-const todoArray = [];
+let todoArray = [];
 
 todoArray.push({
   title: 'Go to work',
@@ -19,4 +19,10 @@ todoArray.push({
   priority: '3',
 });
 
+function newTaskFunction() {
+  todoArray.push(todoFactory());
+  console.table(todoArray);
+}
+
 export { todoArray };
+export { newTaskFunction };

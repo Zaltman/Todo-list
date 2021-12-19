@@ -1,17 +1,18 @@
 import './style.css';
 import { domComponentNameClass } from './dom.js';
-import { todoArray } from './todo';
-import { domObj } from './dom.js';
+import { newTaskFunction, todoArray } from './todo';
 
 (function pageLoad() {
   document.querySelector('body').appendChild(domComponentNameClass('aside'));
   document.querySelector('body').appendChild(domComponentNameClass('content'));
 })();
 (function sidebarLoad() {
+  let newTaskBtn = domComponentNameClass('button', 'addBtn');
+  newTaskBtn.textContent = '+ Create task';
   document
     .querySelector('aside')
-    .appendChild(domComponentNameClass('button', 'addBtn')).textContent =
-    '+ Create new task';
+    .appendChild(newTaskBtn)
+    .addEventListener('click', newTaskFunction);
 
   document
     .querySelector('aside')
