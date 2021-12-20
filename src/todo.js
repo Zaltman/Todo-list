@@ -6,17 +6,16 @@ const todoFactory = () => {
   );
   return { title, description, priority };
 };
-// const todoProjects = [];
-// todoProjects[0] = todoArray
-let todoArray = [];
+const todoProjects = {};
+todoProjects.todoProject = [];
 
-todoArray.push({
+todoProjects.todoProject.push({
   title: 'Go to work',
   description: 'Do the job',
   priority: '4',
 });
 
-todoArray.push({
+todoProjects.todoProject.push({
   title: 'Get from work',
   description: 'Do your own job',
   priority: '3',
@@ -24,8 +23,8 @@ todoArray.push({
 
 function newTaskFunction() {
   console.table('aina');
-  todoArray.push(todoFactory());
+  todoProjects.todoProject.push(todoFactory());
 }
 
-export { todoArray };
+export { todoProjects };
 export { newTaskFunction };
