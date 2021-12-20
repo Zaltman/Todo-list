@@ -1,5 +1,5 @@
 import './style.css';
-import { domComponentNameClass } from './dom.js';
+import { domComponentNameClass, domNewTask } from './dom.js';
 import { newTaskFunction, todoArray } from './todo';
 
 (function pageLoad() {
@@ -12,7 +12,10 @@ import { newTaskFunction, todoArray } from './todo';
   document
     .querySelector('aside')
     .appendChild(newTaskBtn)
-    .addEventListener('click', newTaskFunction);
+    .addEventListener('click', () => {
+      newTaskFunction();
+      domNewTask();
+    });
 
   document
     .querySelector('aside')
@@ -70,6 +73,13 @@ import { newTaskFunction, todoArray } from './todo';
       .querySelector('.taskContainer')
       .lastElementChild.appendChild(
         domComponentNameClass('div', 'taskP')
-      ).textContent = todoArray[i].priority;
+      ).textContent = priorityText();
+    function priorityText() {
+      if (todoArray[i].priority == 0) return 'Not important';
+      else if (todoArray[i].priority == 1) return 'Kind of important';
+      else if (todoArray[i].priority == 2) return 'Important';
+      else if (todoArray[i].priority == 3) return 'Very important';
+      else if (todoArray[i].priority == 4) return 'Extremely important';
+    }
   }
 })();
