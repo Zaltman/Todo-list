@@ -48,47 +48,46 @@ import { newTaskFunction, todoProjects } from './todo';
     'All tasks';
 })();
 (function contentLoad() {
-  // for (let i = 0; i < todoProjects.length; i++) {
-  document
-    .querySelector('content')
-    .appendChild(domComponentNameClass('ul', 'taskContainer'));
-  console.table(todoProjects);
-  console.table(todoProjects.todoProject);
+  let lastTaskContainer;
+  for (let x = 0; x < todoProjects.todoProject.length; x++) {
+    document
+      .querySelector('content')
+      .appendChild(domComponentNameClass('ul', 'taskContainer'));
+    lastTaskContainer = document.querySelectorAll('.taskContainer');
+    lastTaskContainer = lastTaskContainer[lastTaskContainer.length - 1];
+    (function taskcontainerLoad() {
+      for (let i = 0; i < todoProjects.todoProject[x].length; i++) {
+        document
+          .querySelector('content')
+          .lastElementChild.appendChild(
+            domComponentNameClass('li', 'oneTaskContainer')
+          ).dataset.index = i;
 
-  // }
-})();
-(function taskcontainerLoad() {
-  // console.log(todoProjects.todoProject);
-  for (let i = 0; i < todoProjects.todoProject.length; i++) {
-    document
-      .querySelector('.taskContainer')
-      .appendChild(
-        domComponentNameClass('li', 'oneTaskContainer')
-      ).dataset.index = i;
-    document
-      .querySelector('.taskContainer')
-      .lastElementChild.appendChild(
-        domComponentNameClass('div', 'taskN')
-      ).textContent = todoProjects.todoProject[i].title;
-    document
-      .querySelector('.taskContainer')
-      .lastElementChild.appendChild(
-        domComponentNameClass('div', 'taskD')
-      ).textContent = todoProjects.todoProject[i].description;
-    document
-      .querySelector('.taskContainer')
-      .lastElementChild.appendChild(
-        domComponentNameClass('div', 'taskP')
-      ).textContent = priorityText();
-    function priorityText() {
-      if (todoProjects.todoProject[i].priority == 0) return 'Not important';
-      else if (todoProjects.todoProject[i].priority == 1)
-        return 'Kind of important';
-      else if (todoProjects.todoProject[i].priority == 2) return 'Important';
-      else if (todoProjects.todoProject[i].priority == 3)
-        return 'Very important';
-      else if (todoProjects.todoProject[i].priority == 4)
-        return 'Extremely important';
-    }
+        lastTaskContainer.lastElementChild.appendChild(
+          domComponentNameClass('div', 'taskN')
+        ).textContent = todoProjects.todoProject[x][i].title;
+
+        lastTaskContainer.lastElementChild.appendChild(
+          domComponentNameClass('div', 'taskD')
+        ).textContent = todoProjects.todoProject[x][i].description;
+
+        lastTaskContainer.lastElementChild.appendChild(
+          domComponentNameClass('div', 'taskP')
+        ).textContent = priorityText();
+
+        function priorityText() {
+          if (todoProjects.todoProject[x][i].priority == 0)
+            return 'Not important';
+          else if (todoProjects.todoProject[x][i].priority == 1)
+            return 'Kind of important';
+          else if (todoProjects.todoProject[x][i].priority == 2)
+            return 'Important';
+          else if (todoProjects.todoProject[x][i].priority == 3)
+            return 'Very important';
+          else if (todoProjects.todoProject[x][i].priority == 4)
+            return 'Extremely important';
+        }
+      }
+    })();
   }
 })();
