@@ -7,16 +7,6 @@ import { newTaskFunction, todoProjects } from './todo';
   document.querySelector('body').appendChild(domComponentNameClass('content'));
 })();
 (function sidebarLoad() {
-  let newTaskBtn = domComponentNameClass('button', 'addBtn');
-  newTaskBtn.textContent = '+ Create task';
-  document
-    .querySelector('aside')
-    .appendChild(newTaskBtn)
-    .addEventListener('click', () => {
-      newTaskFunction();
-      domNewTask();
-    });
-
   document
     .querySelector('aside')
     .appendChild(domComponentNameClass('button', 'taskList')).textContent =
@@ -55,6 +45,14 @@ import { newTaskFunction, todoProjects } from './todo';
       .appendChild(domComponentNameClass('ul', 'taskContainer'));
     lastTaskContainer = document.querySelectorAll('.taskContainer');
     lastTaskContainer = lastTaskContainer[lastTaskContainer.length - 1];
+
+    let newTaskBtn = domComponentNameClass('button', 'addBtn');
+    newTaskBtn.textContent = '+ Add task';
+    document;
+    lastTaskContainer.appendChild(newTaskBtn).addEventListener('click', () => {
+      newTaskFunction();
+      domNewTask();
+    });
     (function taskcontainerLoad() {
       for (let i = 0; i < todoProjects.todoProject[x].length; i++) {
         document

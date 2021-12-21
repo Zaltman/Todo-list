@@ -31,14 +31,14 @@ button:hover {
 }
 
 .addBtn {
-  margin-top: 45px;
-  margin-bottom: 45px;
-
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  background-color: rgb(214, 241, 250);
   width: fit-content;
   height: fit-content;
   padding: 10px;
   border-radius: 5px;
-  align-self: center;
 }
 
 .taskList {
@@ -50,6 +50,8 @@ button:hover {
 }
 
 .taskContainer {
+  display: flex;
+  flex-direction: column;
   margin: 50px;
   flex-grow: 1;
   min-height: 300px;
@@ -62,4 +64,6 @@ button:hover {
 
 .oneTaskContainer {
   margin: 25px;
+  margin-bottom: 0px;
+  margin-right: 5px;
 }

@@ -52,15 +52,8 @@ todoProjects.todoProject[2].push({
 
 function newTaskFunction() {
   console.table('aina');
-  todoArray.push(todoFactory());
+  todoProjects.todoProject.push(todoFactory());
 }
-// console.table('prasideda');
-// console.table(todoProjects);
-// console.table(todoProjects.todoProject);
-// console.table(todoProjects.todoProject[0]);
-// console.table(todoProjects.todoProject[1]);
-
-// console.table('baigias');
 
 export { todoProjects };
 export { newTaskFunction };
