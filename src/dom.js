@@ -1,5 +1,3 @@
-import { todoProjects } from './todo';
-
 function domComponentNameClass(name, className) {
   const element = document.createElement(name);
   if (className) {
@@ -9,58 +7,47 @@ function domComponentNameClass(name, className) {
   return element;
 }
 
-function domNewTask() {
-  document
-    .querySelector('.taskContainer')
-    .appendChild(
-      domComponentNameClass('li', 'oneTaskContainer')
-    ).dataset.index = todoProjects.todoProject[0].length;
-  document
-    .querySelector('.taskContainer')
-    .lastElementChild.appendChild(
-      domComponentNameClass('div', 'taskN')
-    ).textContent =
-    todoProjects.todoProject[0][todoProjects.todoProject[0].length - 1].title;
-  document
-    .querySelector('.taskContainer')
-    .lastElementChild.appendChild(
-      domComponentNameClass('div', 'taskD')
-    ).textContent =
-    todoProjects.todoProject[0][
-      todoProjects.todoProject[0].length - 1
-    ].description;
-  document
-    .querySelector('.taskContainer')
-    .lastElementChild.appendChild(
-      domComponentNameClass('div', 'taskP')
-    ).textContent = priorityText();
-  function priorityText() {
-    if (
-      todoProjects.todoProject[0][todoProjects.todoProject[0].length - 1] == 0
-    )
-      return 'Not important';
-    else if (
-      todoProjects.todoProject[0][todoProjects.todoProject[0].length - 1]
-        .priority == 1
-    )
+function domProjectRender(todoProject) {
+  let domProjectTitle = document.createElement('div');
+  domProjectTitle.textContent = todoProject.title;
+  domProjectTitle.classList.add('projectTitle');
+  document.querySelector('.taskContainer').appendChild(domProjectTitle);
+
+  let domTodoListTitle = document.createElement('div');
+  domTodoListTitle.textContent = todoProject.todoList[0].title;
+  domTodoListTitle.classList.add('todoListTitle');
+  document.querySelector('.taskContainer').appendChild(domTodoListTitle);
+
+  let domTodoListDescription = document.createElement('div');
+  domTodoListDescription.textContent = todoProject.todoList[0].description;
+  domTodoListDescription.classList.add('todoListDescription');
+  document.querySelector('.taskContainer').appendChild(domTodoListDescription);
+
+  let domTodoListPriority = document.createElement('div');
+  domTodoListPriority.textContent = (function () {
+    if (todoProject.todoList[0].priority == '0') return 'Not important';
+    else if (todoProject.todoList[0].priority == '1')
       return 'Kind of important';
-    else if (
-      todoProjects.todoProject[0][todoProjects.todoProject[0].length - 1]
-        .priority == 2
-    )
-      return 'Important';
-    else if (
-      todoProjects.todoProject[0][todoProjects.todoProject[0].length - 1]
-        .priority == 3
-    )
-      return 'Very important';
-    else if (
-      todoProjects.todoProject[0][todoProjects.todoProject[0].length - 1]
-        .priority == 4
-    )
+    else if (todoProject.todoList[0].priority == '2') return 'Important';
+    else if (todoProject.todoList[0].priority == '3') return 'Very important';
+    else if (todoProject.todoList[0].priority == '4')
       return 'Extremely important';
-  }
+    else return 'Priority missing';
+  })();
+  domTodoListPriority.classList.add('todoListPriority');
+  document.querySelector('.taskContainer').appendChild(domTodoListPriority);
+
+  let domTodoListDueDate = document.createElement('div');
+  domTodoListDueDate.textContent = todoProject.todoList[0].dueDate;
+  domTodoListDueDate.classList.add('todoListDueDate');
+  document.querySelector('.taskContainer').appendChild(domTodoListDueDate);
+
+  let domTodoListIsChecked = document.createElement('div');
+  domTodoListIsChecked.textContent = todoProject.todoList[0].isChecked;
+  domTodoListIsChecked.classList.add('todoListIsChecked');
+  document.querySelector('.taskContainer').appendChild(domTodoListIsChecked);
 }
 
 export { domComponentNameClass };
-export { domNewTask };
+
+export { domProjectRender };

@@ -8,9 +8,9 @@ module.exports = {
       import: './src/index.js',
       dependOn: 'shared',
     },
+    todo: { import: './src/todo.js', dependOn: 'shared' },
     dom: { import: './src/dom.js', dependOn: 'shared' },
 
-    todo: { import: './src/todo.js', dependOn: 'shared' },
     shared: 'lodash',
   },
   devtool: 'inline-source-map',
