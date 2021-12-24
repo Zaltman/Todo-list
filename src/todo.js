@@ -35,3 +35,4 @@ function newTaskFunction() {}
 
 export { newTaskFunction };
 export { testProjectLoader };
+export { projectFactory };

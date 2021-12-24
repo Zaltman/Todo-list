@@ -1,12 +1,24 @@
 import './style.css';
 import { domComponentNameClass, domNewTask, domProjectRender } from './dom.js';
-import { newTaskFunction, testProjectLoader } from './todo';
+import { newTaskFunction, projectFactory, testProjectLoader } from './todo';
 
 (function pageLoad() {
   document.querySelector('body').appendChild(domComponentNameClass('aside'));
   document.querySelector('body').appendChild(domComponentNameClass('content'));
 })();
 (function sidebarLoad() {
+  function newProjectEvent() {
+    todoProjects.push(projectFactory());
+    domProjectRender(todoProjects[todoProjects.length - 1]);
+    updateStorage(todoProjects);
+  }
+
+  let newProjectBtn = domComponentNameClass('button');
+  newProjectBtn.setAttribute('id', 'newProjectBtn');
+  document.querySelector('aside').appendChild(newProjectBtn).textContent =
+    '+ New project';
+  let newProjectBtnElement = document.getElementById('newProjectBtn');
+  newProjectBtnElement.addEventListener('click', newProjectEvent);
   document
     .querySelector('aside')
     .appendChild(domComponentNameClass('button', 'taskList')).textContent =
@@ -89,8 +101,22 @@ import { newTaskFunction, testProjectLoader } from './todo';
   // }
 })();
 
-let todoProjects = testProjectLoader();
-console.table(todoProjects[0].todoList);
-domProjectRender(todoProjects[0]);
+let todoProjects = getLocalStorage();
+domProjectRender(todoProjects[todoProjects.length - 1]);
+function getLocalStorage() {
+  function todoStrToObj(string) {
+    var object = JSON.parse(string);
+    return object;
+  }
+  let localStorageObj = localStorage.getItem('strObj');
+  localStorageObj = todoStrToObj(localStorageObj);
+  return localStorageObj;
+}
+function updateStorage(ProjectsToUp) {
+  function todoObjToStr(ProjectsToUp) {
+    var string = JSON.stringify(ProjectsToUp);
+    return string;
+  }
 
-//
+  localStorage.setItem('strObj', todoObjToStr(ProjectsToUp));
+}
