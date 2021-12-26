@@ -8,7 +8,7 @@ function domComponentNameClass(name, className) {
 }
 
 function domProjectRender(todoProject) {
-  let domProjectTitle = document.createElement('div');
+  let domProjectTitle = document.createElement('h3');
   domProjectTitle.textContent = todoProject.title;
   domProjectTitle.classList.add('projectTitle');
   document.querySelector('.taskContainer').appendChild(domProjectTitle);

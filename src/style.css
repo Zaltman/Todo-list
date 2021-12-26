@@ -67,3 +67,7 @@ button:hover {
   margin-bottom: 0px;
   margin-right: 5px;
 }
+
+.projectTitle {
+  margin: 15px 0px;
+}
