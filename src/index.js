@@ -1,12 +1,6 @@
 import './style.css';
 import { domComponentNameClass, domNewTask, domProjectRender } from './dom.js';
-import {
-  newTaskFunction,
-  projectFactory,
-  testProjectLoader,
-  getLocalStorage,
-  updateStorage,
-} from './todo';
+import { projectFactory, getLocalStorage, updateStorage } from './todo';
 
 (function pageLoad() {
   document.querySelector('body').appendChild(domComponentNameClass('aside'));
@@ -66,10 +60,13 @@ if (!todoProjects) {
 })();
 (function domAllProjectsRender() {
   for (let i = 0; i < todoProjects.length; i++) {
-    domProjectRender(todoProjects[i]);
+    domProjectRender(todoProjects[i], i);
   }
 })();
 getLocalStorage();
 updateStorage();
+
+console.log(todoProjects);
+console.log(todoProjects);
 
 export { todoProjects };

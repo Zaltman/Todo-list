@@ -7,7 +7,7 @@ function domComponentNameClass(name, className) {
   return element;
 }
 
-function domProjectRender(todoProject) {
+function domProjectRender(todoProject, i) {
   let domProjectTitle = document.createElement('h3');
   domProjectTitle.textContent = todoProject.title;
   domProjectTitle.classList.add('projectTitle');
@@ -46,6 +46,12 @@ function domProjectRender(todoProject) {
   domTodoListIsChecked.textContent = todoProject.todoList[0].isChecked;
   domTodoListIsChecked.classList.add('todoListIsChecked');
   document.querySelector('.taskContainer').appendChild(domTodoListIsChecked);
+
+  let domProjectAddTodoBtn = document.createElement('button');
+  domProjectAddTodoBtn.textContent = '+ Add task';
+  domProjectAddTodoBtn.classList.add('addTaskBtn');
+  domProjectAddTodoBtn.dataset.index = i;
+  document.querySelector('.taskContainer').appendChild(domProjectAddTodoBtn);
 }
 
 export { domComponentNameClass };

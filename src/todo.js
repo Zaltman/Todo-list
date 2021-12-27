@@ -14,7 +14,8 @@ const todoFactory = () => {
   );
   let dueDate = '2021.10.12';
   let isChecked = false;
-  return { title, description, priority, dueDate, isChecked };
+  let index = todoProjects.length;
+  return { title, description, priority, dueDate, isChecked, index };
 };
 
 function newTaskFunction() {}
