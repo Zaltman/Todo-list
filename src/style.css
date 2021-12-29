@@ -20,6 +20,7 @@ aside {
   display: flex;
   flex-direction: column;
   width: 15rem;
+  min-width: 10rem;
   height: 100vw;
   background-color: rgb(153, 226, 248);
 }
@@ -54,11 +55,11 @@ button:hover {
 .taskContainer {
   display: flex;
   flex-direction: column;
-  margin: 50px;
+  margin: 15px;
   flex-grow: 1;
   min-height: 300px;
+  min-width: 200px;
   height: fit-content;
-  min-width: 100px;
   max-width: 300px;
   background-color: azure;
   border-radius: 5px;

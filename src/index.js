@@ -1,5 +1,9 @@
 import './style.css';
-import { domComponentNameClass, domNewTask, domProjectRender } from './dom.js';
+import {
+  domComponentNameClass,
+  domProjectTodosRender,
+  domProjectRender,
+} from './dom.js';
 import { projectFactory, getLocalStorage, updateStorage } from './todo';
 
 (function pageLoad() {
@@ -54,19 +58,17 @@ if (!todoProjects) {
     'All tasks';
 })();
 (function contentLoad() {
-  document
-    .querySelector('content')
-    .appendChild(domComponentNameClass('ul', 'taskContainer'));
-})();
-(function domAllProjectsRender() {
-  for (let i = 0; i < todoProjects.length; i++) {
-    domProjectRender(todoProjects[i], i);
+  for (let x = 0; x < todoProjects.length; x++) {
+    document
+      .querySelector('content')
+      .appendChild(
+        domComponentNameClass('ul', 'taskContainer')
+      ).dataset.containerIndex = x;
+    domProjectRender(todoProjects[x], x);
+    domProjectTodosRender(x);
   }
 })();
 getLocalStorage();
 updateStorage();
-
-console.log(todoProjects);
-console.log(todoProjects);
 
 export { todoProjects };

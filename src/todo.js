@@ -1,6 +1,9 @@
 import { todoProjects } from '.';
 const projectFactory = () => {
   let title = prompt('enter project title');
+  if (title == null) {
+    return;
+  }
   let todoList = [];
   todoList.push(todoFactory());
   return { title, todoList };
@@ -8,6 +11,9 @@ const projectFactory = () => {
 
 const todoFactory = () => {
   let title = prompt('enter todo title');
+  if (title == null) {
+    return;
+  }
   let description = prompt('enter description');
   let priority = prompt(
     'Priority from 0 to 4. less important < > more important'
@@ -40,7 +46,13 @@ function updateStorage() {
   localStorage.setItem('strObj', todoObjToStr(todoProjects));
 }
 
+function addTodo(e) {
+  let projectIndex = e.target.dataset.index;
+  todoProjects[projectIndex].todoList.push(todoFactory());
+  updateStorage();
+}
 export { getLocalStorage };
 export { updateStorage };
 export { newTaskFunction };
 export { projectFactory };
+export { addTodo };
