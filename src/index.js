@@ -1,24 +1,37 @@
 import './style.css';
 import {
   domComponentNameClass,
-  domProjectTodosRender,
-  domProjectRender,
+  domTodoRender,
+  domProjectsRender as domProjectRender,
 } from './dom.js';
 import { projectFactory, getLocalStorage, updateStorage } from './todo';
 
+//load sidebar and content containers
 (function pageLoad() {
   document.querySelector('body').appendChild(domComponentNameClass('aside'));
   document.querySelector('body').appendChild(domComponentNameClass('content'));
+
+  let listContainer = document.createElement('ul');
+  listContainer.classList.add('listContainer');
+  document.querySelector('content').append(listContainer);
 })();
+
+// get local storage, if none, make empty array
 let todoProjects = getLocalStorage();
 if (!todoProjects) {
   todoProjects = [];
 }
+
+// load sidebar buttons
 (function sidebarLoad() {
   function newProjectEvent() {
     todoProjects.push(projectFactory());
-    domProjectRender(todoProjects[todoProjects.length - 1]);
     updateStorage();
+    domProjectRender(todoProjects.length - 1);
+    domTodoRender(
+      todoProjects[todoProjects.length - 1].todoList.length - 1,
+      todoProjects.length - 1
+    );
   }
 
   let newProjectBtn = domComponentNameClass('button');
@@ -35,17 +48,7 @@ if (!todoProjects) {
   document
     .querySelector('aside')
     .appendChild(domComponentNameClass('button', 'taskList')).textContent =
-    'tomorrow';
-
-  document
-    .querySelector('aside')
-    .appendChild(domComponentNameClass('button', 'taskList')).textContent =
     'this week';
-
-  document
-    .querySelector('aside')
-    .appendChild(domComponentNameClass('button', 'taskList')).textContent =
-    'next week';
 
   document
     .querySelector('aside')
@@ -56,18 +59,23 @@ if (!todoProjects) {
     .querySelector('aside')
     .appendChild(domComponentNameClass('button', 'taskList')).textContent =
     'All tasks';
+
+  document
+    .querySelector('aside')
+    .appendChild(domComponentNameClass('div', 'projectContainer'));
 })();
+
+//load projects on sidebar and todos on main content
 (function contentLoad() {
   for (let x = 0; x < todoProjects.length; x++) {
-    document
-      .querySelector('content')
-      .appendChild(
-        domComponentNameClass('ul', 'taskContainer')
-      ).dataset.containerIndex = x;
-    domProjectRender(todoProjects[x], x);
-    domProjectTodosRender(x);
+    domProjectRender(x);
+    for (let i = 0; i < todoProjects[x].todoList.length; i++) {
+      domTodoRender(i, x);
+    }
   }
 })();
+
+//gets required info for local storage and then stores it
 getLocalStorage();
 updateStorage();
 

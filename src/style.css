@@ -33,17 +33,6 @@ button:hover {
   background-color: rgb(199, 235, 235);
 }
 
-.addBtn {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 15px;
-  background-color: rgb(214, 241, 250);
-  width: fit-content;
-  height: fit-content;
-  padding: 10px;
-  border-radius: 5px;
-}
-
 .taskList {
   margin: 10px;
   width: 70%;
@@ -52,7 +41,8 @@ button:hover {
   align-self: center;
 }
 
-.taskContainer {
+.listContainer {
+  list-style-type: none;
   display: flex;
   flex-direction: column;
   margin: 15px;
@@ -76,10 +66,9 @@ button:hover {
 }
 
 .projectTitle {
-  margin: 15px 0px;
-}
-
-.todoListIsChecked {
+  margin: 5px 0px;
+  border-bottom: solid 5px transparent;
+  border-top: solid 5px transparent;
 }
 
 #newProjectBtn {
@@ -92,4 +81,12 @@ button:hover {
   padding-bottom: 15px;
   padding-right: 1rem;
   margin: 5px;
+}
+
+.projectContainer {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  /* background-color: azure; */
 }
