@@ -50,19 +50,13 @@ button:hover {
   min-height: 300px;
   min-width: 200px;
   height: fit-content;
-  max-width: 300px;
+  /* max-width: 300px; */
   background-color: azure;
   border-radius: 5px;
 }
 
-.taskContainer > * {
+.listContainer > * {
   padding-left: 1rem;
-}
-
-.oneTaskContainer {
-  margin: 25px;
-  margin-bottom: 0px;
-  margin-right: 5px;
 }
 
 .projectTitle {
@@ -73,6 +67,7 @@ button:hover {
 
 #newProjectBtn {
   font-size: large;
+  padding: 10px 0px;
 }
 
 .addTaskBtn {
@@ -84,9 +79,17 @@ button:hover {
 }
 
 .projectContainer {
-  margin-top: 25px;
   display: flex;
   flex-direction: column;
   text-align: center;
-  /* background-color: azure; */
+}
+
+.todoTitle {
+  font-size: large;
+  padding-top: 1rem;
+}
+
+.todoDescription {
+  padding-left: 3rem;
+  color: steelblue;
 }

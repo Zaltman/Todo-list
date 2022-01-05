@@ -3,6 +3,7 @@ import {
   domComponentNameClass,
   domTodoRender,
   domProjectsRender as domProjectRender,
+  renderAllTodosClick,
 } from './dom.js';
 import { projectFactory, getLocalStorage, updateStorage } from './todo';
 
@@ -57,12 +58,13 @@ if (!todoProjects) {
 
   document
     .querySelector('aside')
-    .appendChild(domComponentNameClass('button', 'taskList')).textContent =
-    'All tasks';
-
-  document
-    .querySelector('aside')
     .appendChild(domComponentNameClass('div', 'projectContainer'));
+
+  let allTasksEl = domComponentNameClass('button', 'projectTitle');
+  allTasksEl.addEventListener('click', renderAllTodosClick);
+  document
+    .querySelector('.projectContainer')
+    .appendChild(allTasksEl).textContent = 'All tasks';
 })();
 
 //load projects on sidebar and todos on main content
