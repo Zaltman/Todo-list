@@ -85,6 +85,9 @@ button:hover {
 }
 
 .todoTitle {
+  display: flex;
+  justify-content: space-between;
+  width: 50;
   font-size: large;
   padding-top: 1rem;
 }
@@ -92,4 +95,7 @@ button:hover {
 .todoDescription {
   padding-left: 3rem;
   color: steelblue;
+}
+.tododueDate {
+  padding-right: 1rem;
 }

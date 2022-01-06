@@ -20,11 +20,22 @@ function domProjectsRender(x) {
 }
 
 function domTodoRender(i, x) {
+  //todo title render
   let todoTitle = document.createElement('li');
   todoTitle.textContent = todoProjects[x].todoList[i].title;
   todoTitle.dataset.projectTodo = x;
   todoTitle.classList.add('todoTitle');
   document.querySelector('ul').appendChild(todoTitle);
+
+  //todo due date render
+  if (todoProjects[x].todoList[i].dueDate) {
+    let tododueDate = document.createElement('span');
+    tododueDate.textContent = todoProjects[x].todoList[i].dueDate;
+    tododueDate.classList.add('tododueDate');
+    tododueDate.dataset.projectTodo = x;
+    todoTitle.appendChild(tododueDate);
+  }
+  //todo description render
   if (todoProjects[x].todoList[i].description) {
     let todoDescription = document.createElement('li');
     todoDescription.textContent = todoProjects[x].todoList[i].description;
