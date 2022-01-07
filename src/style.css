@@ -84,12 +84,11 @@ button:hover {
   text-align: center;
 }
 
-.todoTitle {
+.todoContainer {
   display: flex;
-  justify-content: space-between;
-  width: 50;
   font-size: large;
   padding-top: 1rem;
+  align-items: baseline;
 }
 
 .todoDescription {
@@ -98,4 +97,11 @@ button:hover {
 }
 .tododueDate {
   padding-right: 1rem;
+  flex: 1 0 30%;
+  text-align: right;
+}
+
+.isChecked {
+  order: -1;
+  margin-right: 5pt;
 }
