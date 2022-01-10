@@ -17,10 +17,6 @@ function domProjectsRender(x) {
   projectTitleEl.dataset.project = x;
   projectTitleEl.addEventListener('click', selectiveProjectRender);
   document.querySelector('.projectContainer').appendChild(projectTitleEl);
-
-  let addProjectTodoBtn = document.createElement('button');
-  addProjectTodoBtn.textContent = '+ Add todo';
-  projectTitleEl.appendChild(addProjectTodoBtn);
 }
 
 function domTodoRender(i, x) {
@@ -66,6 +62,14 @@ function domTodoRender(i, x) {
     tododueDate.dataset.project = x;
     todoContainer.appendChild(tododueDate);
   }
+  //todo delete button
+  let todoDeleteBtn = document.createElement('button');
+  todoDeleteBtn.textContent = '🗑';
+  todoDeleteBtn.classList.add('recycleBtn');
+  todoDeleteBtn.dataset.project = x;
+  todoDeleteBtn.dataset.todo = i;
+  todoDeleteBtn.addEventListener('click', removeTodo);
+  todoContainer.appendChild(todoDeleteBtn);
 }
 //also adds + Add todo button
 function selectiveProjectRender(e) {
@@ -83,11 +87,14 @@ function selectiveProjectRender(e) {
 
   //add add todo button to todo container.
   let addTodoBtnLi = document.createElement('li');
+  addTodoBtnLi.classList.add('addTodoBtnContainer');
   addTodoBtnLi.dataset.project = e.target.dataset.project;
   document.querySelector('.listContainer').appendChild(addTodoBtnLi);
   let addTodoBtn = document.createElement('button');
   addTodoBtn.textContent = '+ Add todo';
+  addTodoBtn.classList.add('addTodoBtn');
   addTodoBtn.dataset.project = e.target.dataset.project;
+  addTodoBtn.addEventListener('click', addTodo);
   addTodoBtnLi.appendChild(addTodoBtn);
 }
 
@@ -117,6 +124,12 @@ function checkUncheck(e) {
     todoProjects[projectIndex].todoList[todoIndex].isChecked = true;
   }
   updateStorage();
+}
+
+function removeTodo(e) {
+  let projectIndex = e.target.dataset.project;
+  let todoIndex = e.target.dataset.todo;
+  console.log(todoProjects[projectIndex].todoList[todoIndex]);
 }
 
 function renderAllTodosClick() {

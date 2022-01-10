@@ -43,6 +43,8 @@ button:hover {
 
 .listContainer {
   list-style-type: none;
+  border-bottom: 15px;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   margin: 15px;
@@ -104,4 +106,24 @@ button:hover {
 .isChecked {
   order: -1;
   margin-right: 5pt;
+}
+
+.addTodoBtnContainer {
+  display: flex;
+  order: 1;
+}
+.addTodoBtn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: rgb(214, 241, 250);
+  text-align: center;
+  /* width: 100%; */
+  margin: auto;
+  font-size: large;
+  margin-bottom: 5px;
+}
+
+.recycleBtn {
+  margin-right: 1rem;
+  font-size: large;
 }

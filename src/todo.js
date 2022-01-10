@@ -1,4 +1,5 @@
 import { todoProjects } from '.';
+import { domTodoRender } from './dom';
 const projectFactory = () => {
   let title = prompt('enter project title');
   if (title == null) {
@@ -47,9 +48,14 @@ function updateStorage() {
 }
 
 function addTodo(e) {
-  let projectIndex = e.target.dataset.index;
+  let projectIndex = e.target.dataset.project;
   todoProjects[projectIndex].todoList.push(todoFactory());
+  let lastTodoIndex = todoProjects[projectIndex].todoList.length - 1;
   updateStorage();
+  domTodoRender(lastTodoIndex, projectIndex);
+  // console.log(todoProjects[projectIndex].todoList[lastTodoIndex - 1]);
+
+  // console.log(projectIndex);
 }
 export { getLocalStorage };
 export { updateStorage };
