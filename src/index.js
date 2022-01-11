@@ -24,15 +24,21 @@ if (!todoProjects) {
 }
 
 // load sidebar buttons
+
+//
+// !!! fix error after todolist prompt cancel
+//
 (function sidebarLoad() {
   function newProjectEvent() {
     todoProjects.push(projectFactory());
-    updateStorage();
-    domProjectRender(todoProjects.length - 1);
-    domTodoRender(
-      todoProjects[todoProjects.length - 1].todoList.length - 1,
-      todoProjects.length - 1
-    );
+    if (todoProjects[todoProjects.length - 1]) {
+      updateStorage();
+      domProjectRender(todoProjects.length - 1);
+      domTodoRender(
+        todoProjects[todoProjects.length - 1].todoList.length - 1,
+        todoProjects.length - 1
+      );
+    }
   }
 
   let newProjectBtn = domComponentNameClass('button');

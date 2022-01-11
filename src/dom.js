@@ -54,6 +54,31 @@ function domTodoRender(i, x) {
   }
   todoContainer.appendChild(isChecked);
 
+  //priority render
+  let todoPriority = document.createElement('div');
+  todoPriority.textContent = todoProjects[x].todoList[i].priority;
+  if (todoProjects[x].todoList[i].priority == 0) {
+    todoPriority.textContent = 'unimportant';
+  }
+  if (todoProjects[x].todoList[i].priority == 1) {
+    todoPriority.textContent = 'important';
+  }
+  if (todoProjects[x].todoList[i].priority == 2) {
+    todoPriority.textContent = 'very important';
+  }
+  if (todoProjects[x].todoList[i].priority == 3) {
+    todoPriority.textContent = 'URGENT';
+  }
+  if (
+    todoProjects[x].todoList[i].priority < 0 ||
+    todoProjects[x].todoList[i].priority > 3
+  ) {
+    todoPriority.textContent = '';
+  }
+
+  todoPriority.classList.add('todoPriority');
+  todoContainer.appendChild(todoPriority);
+
   //todo due date render
   if (todoProjects[x].todoList[i].dueDate) {
     let tododueDate = document.createElement('div');
@@ -130,6 +155,13 @@ function removeTodo(e) {
   let projectIndex = e.target.dataset.project;
   let todoIndex = e.target.dataset.todo;
   console.log(todoProjects[projectIndex].todoList[todoIndex]);
+  todoProjects[projectIndex].todoList.splice(todoIndex, 1);
+  if (todoProjects[projectIndex].todoList.length == 0) {
+    todoProjects.splice(projectIndex, 1);
+  }
+  updateStorage();
+  deleteAllDomTodos();
+  renderAllDomTodos();
 }
 
 function renderAllTodosClick() {

@@ -99,8 +99,6 @@ button:hover {
 }
 .tododueDate {
   padding-right: 1rem;
-  flex: 1 0 30%;
-  text-align: right;
 }
 
 .isChecked {
@@ -126,4 +124,11 @@ button:hover {
 .recycleBtn {
   margin-right: 1rem;
   font-size: large;
+}
+
+.todoPriority {
+  text-align: right;
+  flex: 1 0 30%;
+  text-align: right;
+  margin-right: 15pt;
 }
