@@ -1,6 +1,6 @@
 import { todoProjects } from '.';
 import { domTodoRender } from './dom';
-import 'date-fns';
+import { format } from 'date-fns';
 const projectFactory = () => {
   let title = prompt('enter project title');
   if (title == null) {
@@ -10,7 +10,6 @@ const projectFactory = () => {
   todoList.push(todoFactory());
   return { title, todoList };
 };
-
 const todoFactory = () => {
   let title = prompt('enter todo title');
   if (title == null) {
@@ -20,7 +19,7 @@ const todoFactory = () => {
   let priority = prompt(
     'Priority from 0 to 3. less important < > more important'
   );
-  let dueDate = '2021.14.12';
+  let dueDate = format(new Date(), 'yyyy-MM-dd');
   // function (){
   //   let year = prompt('Enter due date year');
   //   if (year > 3000 || year < 2000) return alert('incorrect year');
@@ -67,7 +66,8 @@ function addTodo(e) {
   // console.log(projectIndex);
 }
 
-let dateTest = new Date();
+let dateTest = format(new Date(), 'yyyy-MM-dd');
+
 console.log(dateTest);
 
 export { getLocalStorage };
