@@ -168,10 +168,107 @@ function renderAllTodosClick() {
   deleteAllDomTodos();
   renderAllDomTodos();
 }
+
+function NewProjectModuleEvent() {
+  //projectFactory > projectTitle. todoFactory > title, description, priority, dueDate
+  let modalContainer = document.createElement('div');
+  modalContainer.setAttribute('id', 'myModal');
+  modalContainer.classList.add('modal');
+  document.querySelector('body').append(modalContainer);
+
+  let modalContent = document.createElement('div');
+  modalContent.classList.add('modalContent');
+  modalContainer.appendChild(modalContent);
+
+  let closeBtn = document.createElement('span');
+  closeBtn.classList.add('close');
+  closeBtn.innerHTML = `&times;`;
+  closeBtn.addEventListener('click', closeModal);
+  modalContent.appendChild(closeBtn);
+
+  let modalText = document.createElement('p');
+  modalText.classList.add('modalText');
+  modalText.textContent = 'Enter new project details';
+  modalContent.appendChild(modalText);
+
+  let inputProjectTitle = document.createElement('input');
+  inputProjectTitle.type = 'text';
+  inputProjectTitle.classList.add('modalInput');
+  inputProjectTitle.setAttribute('id', 'inputProjectTitle');
+  inputProjectTitle.placeholder = 'Enter project title';
+  modalContent.appendChild(inputProjectTitle);
+
+  let inputTodoTitle = document.createElement('input');
+  inputTodoTitle.type = 'text';
+  inputTodoTitle.setAttribute('id', 'inputTodoTitle');
+  inputTodoTitle.classList.add('modalInput');
+  inputTodoTitle.placeholder = 'Enter todo title';
+  modalContent.appendChild(inputTodoTitle);
+
+  let inputTodoDescription = document.createElement('input');
+  inputTodoDescription.type = 'text';
+  inputTodoDescription.classList.add('modalInput');
+  inputTodoDescription.setAttribute('id', 'inputTodoDescription');
+  inputTodoDescription.placeholder = 'Enter todo description';
+  modalContent.appendChild(inputTodoDescription);
+
+  let inputTodoPriorityContainer = document.createElement('label');
+  inputTodoPriorityContainer.setAttribute('id', 'priorityLabel');
+  inputTodoPriorityContainer.setAttribute('for', 'inputTodoPriority');
+  modalContent.appendChild(inputTodoPriorityContainer);
+
+  let inputTodoPriority = document.createElement('select');
+  inputTodoPriority.classList.add('modalInput');
+  modalContent.appendChild(inputTodoPriority);
+
+  let inputDate = document.createElement('input');
+  inputDate.classList.add('modalInput');
+  inputDate.type = 'date';
+  inputDate.placeholder = 'click calendar to choose due date';
+  // inputDate.classList.add('dateInput');
+  modalContent.appendChild(inputDate);
+
+  let priorityList = document.createElement('option');
+  priorityList.setAttribute('id', 'priorityList');
+  modalContent.appendChild(priorityList);
+
+  let option0 = document.createElement('option');
+  option0.setAttribute('value', '');
+  option0.textContent = 'Please choose priority';
+  inputTodoPriority.appendChild(option0);
+
+  let option1 = document.createElement('option');
+  option1.setAttribute('value', 'low');
+  option1.textContent = 'Unimportant';
+  inputTodoPriority.appendChild(option1);
+
+  let option2 = document.createElement('option');
+  option2.setAttribute('value', 'normal');
+  option2.textContent = 'Important';
+  inputTodoPriority.appendChild(option2);
+
+  let option3 = document.createElement('option');
+  option3.setAttribute('value', 'high');
+  option3.textContent = 'Very important';
+  inputTodoPriority.appendChild(option3);
+
+  let option4 = document.createElement('option');
+  option4.setAttribute('value', 'none');
+  option4.textContent = 'none';
+  inputTodoPriority.appendChild(option4);
+
+  modalContainer.style.display = 'block';
+  function closeModal() {
+    console.log(inputDate.value);
+
+    modalContainer.style.display = 'none';
+  }
+}
 export {
   domComponentNameClass,
   domTodoRender,
   domProjectsRender,
   selectiveProjectRender,
   renderAllTodosClick,
+  NewProjectModuleEvent,
 };
