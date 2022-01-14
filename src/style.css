@@ -148,10 +148,13 @@ button:hover {
 
 /* Modal Content/Box */
 .modalContent {
-  background-color: azure;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(214, 241, 250);
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
+  border-radius: 5px;
   width: 80%; /* Could be more or less, depending on screen size */
 }
 
@@ -164,6 +167,7 @@ button:hover {
 
 /* The Close Button */
 .close {
+  align-self: flex-end;
   color: #aaa;
   float: right;
   font-size: 28px;
@@ -188,8 +192,14 @@ button:hover {
   border-radius: 4px;
   margin: 5px;
   font-size: larger;
+  background-color: azure;
 }
 
-#priorityLabel {
-  /* font-size: larger; */
+.submitBtn {
+  margin-top: 10px;
+  align-self: center;
+  padding: 7px 20px;
+  height: fit-content;
+  width: fit-content;
+  border-radius: 5px;
 }

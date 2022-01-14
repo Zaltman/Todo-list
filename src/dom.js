@@ -191,46 +191,57 @@ function NewProjectModuleEvent() {
   modalText.textContent = 'Enter new project details';
   modalContent.appendChild(modalText);
 
+  let inputsContainer = document.createElement('div');
+  inputsContainer.classList.add('inputsContainer');
+  modalContent.appendChild(inputsContainer);
+
   let inputProjectTitle = document.createElement('input');
   inputProjectTitle.type = 'text';
   inputProjectTitle.classList.add('modalInput');
   inputProjectTitle.setAttribute('id', 'inputProjectTitle');
   inputProjectTitle.placeholder = 'Enter project title';
-  modalContent.appendChild(inputProjectTitle);
+  inputsContainer.appendChild(inputProjectTitle);
 
   let inputTodoTitle = document.createElement('input');
   inputTodoTitle.type = 'text';
   inputTodoTitle.setAttribute('id', 'inputTodoTitle');
   inputTodoTitle.classList.add('modalInput');
   inputTodoTitle.placeholder = 'Enter todo title';
-  modalContent.appendChild(inputTodoTitle);
+  inputsContainer.appendChild(inputTodoTitle);
 
   let inputTodoDescription = document.createElement('input');
   inputTodoDescription.type = 'text';
   inputTodoDescription.classList.add('modalInput');
   inputTodoDescription.setAttribute('id', 'inputTodoDescription');
   inputTodoDescription.placeholder = 'Enter todo description';
-  modalContent.appendChild(inputTodoDescription);
+  inputsContainer.appendChild(inputTodoDescription);
 
   let inputTodoPriorityContainer = document.createElement('label');
   inputTodoPriorityContainer.setAttribute('id', 'priorityLabel');
   inputTodoPriorityContainer.setAttribute('for', 'inputTodoPriority');
-  modalContent.appendChild(inputTodoPriorityContainer);
+  inputsContainer.appendChild(inputTodoPriorityContainer);
 
   let inputTodoPriority = document.createElement('select');
   inputTodoPriority.classList.add('modalInput');
-  modalContent.appendChild(inputTodoPriority);
+  inputTodoPriority.setAttribute('id', 'choosePriority');
+  inputsContainer.appendChild(inputTodoPriority);
 
   let inputDate = document.createElement('input');
   inputDate.classList.add('modalInput');
   inputDate.type = 'date';
+  inputDate.setAttribute('id', 'inputDate');
   inputDate.placeholder = 'click calendar to choose due date';
-  // inputDate.classList.add('dateInput');
-  modalContent.appendChild(inputDate);
+  inputsContainer.appendChild(inputDate);
 
-  let priorityList = document.createElement('option');
-  priorityList.setAttribute('id', 'priorityList');
-  modalContent.appendChild(priorityList);
+  let submitBtn = document.createElement('button');
+  submitBtn.textContent = 'Submit';
+  submitBtn.classList.add('submitBtn');
+  submitBtn.addEventListener('click', submitNewProject);
+  modalContent.append(submitBtn);
+
+  // let priorityList = document.createElement('option');
+  // priorityList.setAttribute('id', 'priorityList');
+  // modalContent.appendChild(priorityList);
 
   let option0 = document.createElement('option');
   option0.setAttribute('value', '');
@@ -259,9 +270,19 @@ function NewProjectModuleEvent() {
 
   modalContainer.style.display = 'block';
   function closeModal() {
-    console.log(inputDate.value);
-
     modalContainer.style.display = 'none';
+  }
+}
+
+function submitNewProject() {
+  todoProjects.push(projectFactory());
+  if (todoProjects[todoProjects.length - 1]) {
+    updateStorage();
+    domProjectsRender(todoProjects.length - 1);
+    domTodoRender(
+      todoProjects[todoProjects.length - 1].todoList.length - 1,
+      todoProjects.length - 1
+    );
   }
 }
 export {

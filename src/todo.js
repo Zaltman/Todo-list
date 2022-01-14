@@ -1,8 +1,9 @@
 import { todoProjects } from '.';
 import { domTodoRender } from './dom';
 import { format } from 'date-fns';
+
 const projectFactory = () => {
-  let title = prompt('enter project title');
+  let title = document.querySelector('#inputProjectTitle').value;
   if (title == null) {
     return;
   }
@@ -11,22 +12,13 @@ const projectFactory = () => {
   return { title, todoList };
 };
 const todoFactory = () => {
-  let title = prompt('enter todo title');
+  let title = document.querySelector('#inputTodoTitle').value;
   if (title == null) {
-    return;
+    title = 'title missing';
   }
-  let description = prompt('enter description');
-  let priority = prompt(
-    'Priority from 0 to 3. less important < > more important'
-  );
-  let dueDate = format(new Date(), 'yyyy-MM-dd');
-  // function (){
-  //   let year = prompt('Enter due date year');
-  //   if (year > 3000 || year < 2000) return alert('incorrect year');
-  //   let month = prompt('Enter due date month');
-  //   if
-  //   let day = prompt('Enter due date year');
-  // };
+  let description = document.querySelector('#inputTodoDescription').value;
+  let priority = document.querySelector('#choosePriority').value;
+  let dueDate = document.querySelector('#inputDate').value;
 
   let isChecked = false;
   let index = todoProjects.length;
@@ -74,4 +66,5 @@ export { getLocalStorage };
 export { updateStorage };
 export { newTaskFunction };
 export { projectFactory };
+export { todoFactory };
 export { addTodo };
