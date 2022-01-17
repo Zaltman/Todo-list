@@ -1,4 +1,4 @@
-import { isThisWeek } from 'date-fns';
+import { isThisWeek, isToday, isThisMonth, parseISO } from 'date-fns';
 import { todoProjects } from '.';
 import { addTodo, projectFactory, todoFactory, updateStorage } from './todo';
 function domComponentNameClass(name, className) {
@@ -24,6 +24,7 @@ function domTodoRender(i, x) {
   let todoContainer = document.createElement('li');
   todoContainer.dataset.project = x;
   todoContainer.classList.add('todoContainer');
+  todoContainer.dataset.dueDate = todoProjects[x].todoList[i].dueDate;
   document.querySelector('ul').appendChild(todoContainer);
 
   //todo title render
@@ -39,6 +40,7 @@ function domTodoRender(i, x) {
     todoDescription.textContent = todoProjects[x].todoList[i].description;
     todoDescription.classList.add('todoDescription');
     todoDescription.dataset.project = x;
+    todoDescription.dataset.dueDate = todoProjects[x].todoList[i].dueDate;
     document.querySelector('ul').appendChild(todoDescription);
   }
   // isChecked render
@@ -123,7 +125,44 @@ function selectiveProjectRender(e) {
   addTodoBtnLi.appendChild(addTodoBtn);
 }
 
-function selectiveTimeTodosRender() {}
+function selectiveThisMonthTodosRender() {
+  deleteAllDomTodos();
+  renderAllDomTodos();
+  function checkAndDelete(element) {
+    if (!isThisMonth(parseISO(element.dataset.dueDate))) {
+      element.remove();
+    }
+  }
+  let listContainer = document.querySelector('.listContainer');
+  let todoList = listContainer.querySelectorAll('li');
+  todoList.forEach((element) => checkAndDelete(element));
+}
+
+function selectiveThisWeekTodosRender() {
+  deleteAllDomTodos();
+  renderAllDomTodos();
+  function checkAndDelete(element) {
+    if (!isThisWeek(parseISO(element.dataset.dueDate))) {
+      element.remove();
+    }
+  }
+  let listContainer = document.querySelector('.listContainer');
+  let todoList = listContainer.querySelectorAll('li');
+  todoList.forEach((element) => checkAndDelete(element));
+}
+
+function selectiveThisDayTodosRender() {
+  deleteAllDomTodos();
+  renderAllDomTodos();
+  function checkAndDelete(element) {
+    if (!isToday(parseISO(element.dataset.dueDate))) {
+      element.remove();
+    }
+  }
+  let listContainer = document.querySelector('.listContainer');
+  let todoList = listContainer.querySelectorAll('li');
+  todoList.forEach((element) => checkAndDelete(element));
+}
 
 function deleteAllDomTodos() {
   function deleteDomEl(element) {
@@ -156,7 +195,6 @@ function checkUncheck(e) {
 function removeTodo(e) {
   let projectIndex = e.target.dataset.project;
   let todoIndex = e.target.dataset.todo;
-  console.log(todoProjects[projectIndex].todoList[todoIndex]);
   todoProjects[projectIndex].todoList.splice(todoIndex, 1);
   if (todoProjects[projectIndex].todoList.length == 0) {
     todoProjects.splice(projectIndex, 1);
@@ -301,13 +339,6 @@ function newTodoModuleEvent(e) {
   inputsContainer.classList.add('inputsContainer');
   modalContent.appendChild(inputsContainer);
 
-  // let inputProjectTitle = document.createElement('input');
-  // inputProjectTitle.type = 'text';
-  // inputProjectTitle.classList.add('modalInput');
-  // inputProjectTitle.setAttribute('id', 'inputProjectTitle');
-  // inputProjectTitle.placeholder = 'Enter project title';
-  // inputsContainer.appendChild(inputProjectTitle);
-
   let inputTodoTitle = document.createElement('input');
   inputTodoTitle.type = 'text';
   inputTodoTitle.setAttribute('id', 'inputTodoTitle');
@@ -346,10 +377,6 @@ function newTodoModuleEvent(e) {
   submitBtn.addEventListener('click', submitNewTodoClick);
   modalContent.append(submitBtn);
 
-  // let priorityList = document.createElement('option');
-  // priorityList.setAttribute('id', 'priorityList');
-  // modalContent.appendChild(priorityList);
-
   let option0 = document.createElement('option');
   option0.setAttribute('value', '');
   option0.textContent = 'Please choose priority';
@@ -378,20 +405,20 @@ function newTodoModuleEvent(e) {
   modalContainer.style.display = 'block';
   function closeModal() {
     modalContainer.style.display = 'none';
+    modalContainer.remove();
   }
 
   function submitNewTodoClick(e) {
     submitNewTodo(e);
     closeModal();
   }
+  updateStorage();
 }
 
 function submitNewTodo(e) {
   let projectIndex = e.target.dataset.project;
   todoProjects[projectIndex].todoList.push(todoFactory());
-  console.log(todoProjects[projectIndex].todoList);
   let lastTodoIndex = todoProjects[projectIndex].todoList.length - 1;
-  // console.log(todoProjects[projectIndex - 1].todoList[lastTodoIndex]);
   domTodoRender(lastTodoIndex, projectIndex);
   updateStorage();
 }
@@ -409,6 +436,9 @@ function submitNewProject() {
   updateStorage();
 }
 export {
+  selectiveThisDayTodosRender,
+  selectiveThisMonthTodosRender,
+  selectiveThisWeekTodosRender,
   domComponentNameClass,
   domTodoRender,
   domProjectsRender,

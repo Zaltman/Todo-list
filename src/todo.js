@@ -19,7 +19,7 @@ const todoFactory = () => {
   let description = document.querySelector('#inputTodoDescription').value;
   let priority = document.querySelector('#choosePriority').value;
   let dueDate = document.querySelector('#inputDate').value;
-  if (dueDate) {
+  if (!dueDate) {
     dueDate = '';
   }
 
@@ -54,14 +54,7 @@ function addTodo(e) {
   let lastTodoIndex = todoProjects[projectIndex].todoList.length - 1;
   updateStorage();
   domTodoRender(lastTodoIndex, projectIndex);
-  // console.log(todoProjects[projectIndex].todoList[lastTodoIndex - 1]);
-
-  // console.log(projectIndex);
 }
-
-let dateTest = format(new Date(), 'yyyy-MM-dd');
-
-console.log(dateTest);
 
 export { getLocalStorage };
 export { updateStorage };

@@ -5,6 +5,9 @@ import {
   domProjectsRender as domProjectRender,
   renderAllTodosClick,
   NewProjectModuleEvent,
+  selectiveThisWeekTodosRender,
+  selectiveThisDayTodosRender,
+  selectiveThisMonthTodosRender,
 } from './dom.js';
 import { projectFactory, getLocalStorage, updateStorage } from './todo';
 
@@ -45,19 +48,19 @@ if (!todoProjects) {
     '+ New project';
   let newProjectBtnElement = document.getElementById('newProjectBtn');
   newProjectBtnElement.addEventListener('click', NewProjectModuleEvent);
-  document
-    .querySelector('aside')
-    .appendChild(domComponentNameClass('button', 'taskList')).textContent =
-    'today';
 
-  document
-    .querySelector('aside')
-    .appendChild(domComponentNameClass('button', 'taskList')).textContent =
+  let thisDayBtn = domComponentNameClass('button', 'taskList');
+  thisDayBtn.addEventListener('click', selectiveThisDayTodosRender);
+  document.querySelector('aside').appendChild(thisDayBtn).textContent = 'today';
+
+  let thisWeekBtn = domComponentNameClass('button', 'taskList');
+  thisWeekBtn.addEventListener('click', selectiveThisWeekTodosRender);
+  document.querySelector('aside').appendChild(thisWeekBtn).textContent =
     'this week';
 
-  document
-    .querySelector('aside')
-    .appendChild(domComponentNameClass('button', 'taskList')).textContent =
+  let thisMonthBtn = domComponentNameClass('button', 'taskList');
+  thisMonthBtn.addEventListener('click', selectiveThisMonthTodosRender);
+  document.querySelector('aside').appendChild(thisMonthBtn).textContent =
     'this month';
 
   document
