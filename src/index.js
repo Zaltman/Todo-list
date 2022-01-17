@@ -26,9 +26,6 @@ if (!todoProjects) {
 
 // load sidebar buttons
 
-//
-// !!! fix error after todolist prompt cancel
-//
 (function sidebarLoad() {
   function newProjectEvent() {
     todoProjects.push(projectFactory());

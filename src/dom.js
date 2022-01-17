@@ -1,6 +1,6 @@
-import { el } from 'date-fns/locale';
+import { isThisWeek } from 'date-fns';
 import { todoProjects } from '.';
-import { addTodo, projectFactory, updateStorage } from './todo';
+import { addTodo, projectFactory, todoFactory, updateStorage } from './todo';
 function domComponentNameClass(name, className) {
   const element = document.createElement(name);
   if (className) {
@@ -119,9 +119,11 @@ function selectiveProjectRender(e) {
   addTodoBtn.textContent = '+ Add todo';
   addTodoBtn.classList.add('addTodoBtn');
   addTodoBtn.dataset.project = e.target.dataset.project;
-  addTodoBtn.addEventListener('click', addTodo);
+  addTodoBtn.addEventListener('click', newTodoModuleEvent);
   addTodoBtnLi.appendChild(addTodoBtn);
 }
+
+function selectiveTimeTodosRender() {}
 
 function deleteAllDomTodos() {
   function deleteDomEl(element) {
@@ -170,7 +172,6 @@ function renderAllTodosClick() {
 }
 
 function NewProjectModuleEvent() {
-  //projectFactory > projectTitle. todoFactory > title, description, priority, dueDate
   let modalContainer = document.createElement('div');
   modalContainer.setAttribute('id', 'myModal');
   modalContainer.classList.add('modal');
@@ -236,7 +237,113 @@ function NewProjectModuleEvent() {
   let submitBtn = document.createElement('button');
   submitBtn.textContent = 'Submit';
   submitBtn.classList.add('submitBtn');
-  submitBtn.addEventListener('click', submitNewProject);
+  submitBtn.addEventListener('click', submitNewProjectClick);
+  modalContent.append(submitBtn);
+
+  let option0 = document.createElement('option');
+  option0.setAttribute('value', '');
+  option0.textContent = 'Please choose priority';
+  inputTodoPriority.appendChild(option0);
+
+  let option1 = document.createElement('option');
+  option1.setAttribute('value', 'low');
+  option1.textContent = 'Unimportant';
+  inputTodoPriority.appendChild(option1);
+
+  let option2 = document.createElement('option');
+  option2.setAttribute('value', 'normal');
+  option2.textContent = 'Important';
+  inputTodoPriority.appendChild(option2);
+
+  let option3 = document.createElement('option');
+  option3.setAttribute('value', 'high');
+  option3.textContent = 'Very important';
+  inputTodoPriority.appendChild(option3);
+
+  let option4 = document.createElement('option');
+  option4.setAttribute('value', 'none');
+  option4.textContent = '';
+  inputTodoPriority.appendChild(option4);
+
+  modalContainer.style.display = 'block';
+  function closeModal() {
+    modalContainer.style.display = 'none';
+  }
+  function submitNewProjectClick() {
+    submitNewProject();
+    closeModal();
+  }
+}
+
+function newTodoModuleEvent(e) {
+  let projectIndex = e.target.dataset.project;
+  let modalContainer = document.createElement('div');
+  modalContainer.setAttribute('id', 'myModal');
+  modalContainer.classList.add('modal');
+  document.querySelector('body').append(modalContainer);
+
+  let modalContent = document.createElement('div');
+  modalContent.classList.add('modalContent');
+  modalContainer.appendChild(modalContent);
+
+  let closeBtn = document.createElement('span');
+  closeBtn.classList.add('close');
+  closeBtn.innerHTML = `&times;`;
+  closeBtn.addEventListener('click', closeModal);
+  modalContent.appendChild(closeBtn);
+
+  let modalText = document.createElement('p');
+  modalText.classList.add('modalText');
+  modalText.textContent = 'Enter new todo details';
+  modalContent.appendChild(modalText);
+
+  let inputsContainer = document.createElement('div');
+  inputsContainer.classList.add('inputsContainer');
+  modalContent.appendChild(inputsContainer);
+
+  // let inputProjectTitle = document.createElement('input');
+  // inputProjectTitle.type = 'text';
+  // inputProjectTitle.classList.add('modalInput');
+  // inputProjectTitle.setAttribute('id', 'inputProjectTitle');
+  // inputProjectTitle.placeholder = 'Enter project title';
+  // inputsContainer.appendChild(inputProjectTitle);
+
+  let inputTodoTitle = document.createElement('input');
+  inputTodoTitle.type = 'text';
+  inputTodoTitle.setAttribute('id', 'inputTodoTitle');
+  inputTodoTitle.classList.add('modalInput');
+  inputTodoTitle.placeholder = 'Enter todo title';
+  inputsContainer.appendChild(inputTodoTitle);
+
+  let inputTodoDescription = document.createElement('input');
+  inputTodoDescription.type = 'text';
+  inputTodoDescription.classList.add('modalInput');
+  inputTodoDescription.setAttribute('id', 'inputTodoDescription');
+  inputTodoDescription.placeholder = 'Enter todo description';
+  inputsContainer.appendChild(inputTodoDescription);
+
+  let inputTodoPriorityContainer = document.createElement('label');
+  inputTodoPriorityContainer.setAttribute('id', 'priorityLabel');
+  inputTodoPriorityContainer.setAttribute('for', 'inputTodoPriority');
+  inputsContainer.appendChild(inputTodoPriorityContainer);
+
+  let inputTodoPriority = document.createElement('select');
+  inputTodoPriority.classList.add('modalInput');
+  inputTodoPriority.setAttribute('id', 'choosePriority');
+  inputsContainer.appendChild(inputTodoPriority);
+
+  let inputDate = document.createElement('input');
+  inputDate.classList.add('modalInput');
+  inputDate.type = 'date';
+  inputDate.setAttribute('id', 'inputDate');
+  inputDate.placeholder = 'click calendar to choose due date';
+  inputsContainer.appendChild(inputDate);
+
+  let submitBtn = document.createElement('button');
+  submitBtn.textContent = 'Submit';
+  submitBtn.classList.add('submitBtn');
+  submitBtn.dataset.project = projectIndex;
+  submitBtn.addEventListener('click', submitNewTodoClick);
   modalContent.append(submitBtn);
 
   // let priorityList = document.createElement('option');
@@ -272,6 +379,21 @@ function NewProjectModuleEvent() {
   function closeModal() {
     modalContainer.style.display = 'none';
   }
+
+  function submitNewTodoClick(e) {
+    submitNewTodo(e);
+    closeModal();
+  }
+}
+
+function submitNewTodo(e) {
+  let projectIndex = e.target.dataset.project;
+  todoProjects[projectIndex].todoList.push(todoFactory());
+  console.log(todoProjects[projectIndex].todoList);
+  let lastTodoIndex = todoProjects[projectIndex].todoList.length - 1;
+  // console.log(todoProjects[projectIndex - 1].todoList[lastTodoIndex]);
+  domTodoRender(lastTodoIndex, projectIndex);
+  updateStorage();
 }
 
 function submitNewProject() {
@@ -284,6 +406,7 @@ function submitNewProject() {
       todoProjects.length - 1
     );
   }
+  updateStorage();
 }
 export {
   domComponentNameClass,

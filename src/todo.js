@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 const projectFactory = () => {
   let title = document.querySelector('#inputProjectTitle').value;
   if (title == null) {
-    return;
+    title = 'title missing';
   }
   let todoList = [];
   todoList.push(todoFactory());
@@ -19,13 +19,14 @@ const todoFactory = () => {
   let description = document.querySelector('#inputTodoDescription').value;
   let priority = document.querySelector('#choosePriority').value;
   let dueDate = document.querySelector('#inputDate').value;
+  if (dueDate) {
+    dueDate = '';
+  }
 
   let isChecked = false;
   let index = todoProjects.length;
   return { title, description, priority, dueDate, isChecked, index };
 };
-
-function newTaskFunction() {}
 
 function getLocalStorage() {
   function todoStrToObj(string) {
@@ -64,7 +65,7 @@ console.log(dateTest);
 
 export { getLocalStorage };
 export { updateStorage };
-export { newTaskFunction };
+
 export { projectFactory };
 export { todoFactory };
 export { addTodo };

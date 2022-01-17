@@ -99,6 +99,7 @@ button:hover {
 }
 .tododueDate {
   padding-right: 1rem;
+  /* width: 100px; */
 }
 
 .isChecked {
